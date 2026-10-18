@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Where 6N comes from, and what MFU divides by</title>
+  <rect x="1" y="1" width="958" height="328" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="32" y="44" font-size="22" font-weight="700" fill="#0F172A">6N: the cost of one token, forward and back</text>
+  <text x="32" y="68" font-size="14" fill="#64748B">Every weight is one multiply-add (2 FLOPs) per token on the way forward, and twice that on the way back.</text>
+
+  <g transform="translate(32,98)" font-size="13">
+    <rect x="0" y="0" width="220" height="56" rx="10" fill="#4F46E5"/>
+    <text x="110" y="25" text-anchor="middle" fill="#FFF" font-weight="700">forward  2N</text>
+    <text x="110" y="44" text-anchor="middle" fill="#E0E7FF" font-size="12">y = W·x</text>
+    <rect x="228" y="0" width="220" height="56" rx="10" fill="#E11D48"/>
+    <text x="338" y="25" text-anchor="middle" fill="#FFF" font-weight="700">backward: input grad  2N</text>
+    <text x="338" y="44" text-anchor="middle" fill="#FFE4E6" font-size="12">∂L/∂x = Wᵀ·∂L/∂y</text>
+    <rect x="456" y="0" width="220" height="56" rx="10" fill="#BE123C"/>
+    <text x="566" y="25" text-anchor="middle" fill="#FFF" font-weight="700">backward: weight grad  2N</text>
+    <text x="566" y="44" text-anchor="middle" fill="#FFE4E6" font-size="12">∂L/∂W = ∂L/∂y·xᵀ</text>
+    <text x="700" y="35" font-size="20" font-weight="800" fill="#0F172A">= 6N</text>
+    <text x="770" y="27" font-size="12" fill="#64748B">+ 12·L·T·C for</text>
+    <text x="770" y="44" font-size="12" fill="#64748B">attention scores</text>
+  </g>
+
+  <g transform="translate(32,190)">
+    <text x="0" y="0" font-size="15" font-weight="700" fill="#0F172A">MFU = what the model needed ÷ what the chip could do</text>
+    <text x="0" y="34" font-size="16" fill="#0F172A" font-family="ui-monospace, Menlo, monospace">MFU = (6N + 12·L·T·C) × tokens/s</text>
+    <line x1="0" y1="46" x2="370" y2="46" stroke="#0F172A" stroke-width="1.5"/>
+    <text x="185" y="70" font-size="16" fill="#0F172A" text-anchor="middle" font-family="ui-monospace, Menlo, monospace">peak FLOP/s of the chip</text>
+    <text x="0" y="110" font-size="13" fill="#64748B">Counts only useful model math. Recomputation, casts, softmax, optimizer and idle time are all overhead.</text>
+  </g>
+  <g transform="translate(560,180)" font-size="13">
+    <rect width="368" height="124" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+    <text x="18" y="28" font-weight="700" fill="#B45309">Why the loss curve can't tell you</text>
+    <text x="18" y="54" fill="#334155">Same tokens, same updates, same curve at</text>
+    <text x="18" y="74" fill="#334155">8% or 45%. MFU only changes the bill</text>
+    <text x="18" y="94" fill="#334155">and the calendar, so it has to be measured,</text>
+    <text x="18" y="114" fill="#334155">never inferred from the loss.</text>
+  </g>
+</svg>

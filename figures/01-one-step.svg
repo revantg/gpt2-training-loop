@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Anatomy of one training step</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748B"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E11D48"/></marker>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4F46E5"/><stop offset="1" stop-color="#E11D48"/></linearGradient>
+  </defs>
+  <rect x="1" y="1" width="958" height="428" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="32" y="44" font-size="22" font-weight="700" fill="#0F172A">One step, five lines</text>
+  <text x="32" y="68" font-size="14" fill="#64748B">forward → loss → backward → clip → update → wipe. Shapes are for B=16, T=256, C=384, V=50,304.</text>
+
+  <!-- stage cards -->
+  <g font-size="13">
+    <g transform="translate(32,98)">
+      <rect width="168" height="150" rx="12" fill="#EEF2FF" stroke="#C7D2FE"/>
+      <text x="14" y="26" font-weight="700" font-size="15" fill="#4338CA">1 · forward</text>
+      <text x="14" y="52" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">x       [B, T]</text>
+      <text x="14" y="72" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">h       [B, T, C]</text>
+      <text x="14" y="92" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">logits  [B, T, V]</text>
+      <text x="14" y="122" fill="#64748B" font-size="12">graph recorded for</text>
+      <text x="14" y="138" fill="#64748B" font-size="12">every op (autograd)</text>
+    </g>
+    <g transform="translate(220,98)">
+      <rect width="168" height="150" rx="12" fill="#F5F3FF" stroke="#DDD6FE"/>
+      <text x="14" y="26" font-weight="700" font-size="15" fill="#6D28D9">2 · loss</text>
+      <text x="14" y="52" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">[B·T, V] vs [B·T]</text>
+      <text x="14" y="72" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">→ loss  [ ]</text>
+      <text x="14" y="104" fill="#64748B" font-size="12">4,096 predictions</text>
+      <text x="14" y="120" fill="#64748B" font-size="12">collapse to</text>
+      <text x="14" y="138" font-weight="700" fill="#6D28D9" font-size="12">one number</text>
+    </g>
+    <g transform="translate(408,98)">
+      <rect width="168" height="150" rx="12" fill="#FFF1F2" stroke="#FECDD3"/>
+      <text x="14" y="26" font-weight="700" font-size="15" fill="#BE123C">3 · backward</text>
+      <text x="14" y="52" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">p.grad.shape</text>
+      <text x="14" y="72" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">  == p.shape</text>
+      <text x="14" y="104" fill="#64748B" font-size="12">chain rule, one link</text>
+      <text x="14" y="120" fill="#64748B" font-size="12">at a time; grads</text>
+      <text x="14" y="138" font-weight="700" fill="#BE123C" font-size="12">add, never replace</text>
+    </g>
+    <g transform="translate(596,98)">
+      <rect width="148" height="150" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+      <text x="14" y="26" font-weight="700" font-size="15" fill="#B45309">4 · clip</text>
+      <text x="14" y="52" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">‖g‖ = √Σ g²</text>
+      <text x="14" y="72" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">g ×= min(1, 1/‖g‖)</text>
+      <text x="14" y="104" fill="#64748B" font-size="12">length capped,</text>
+      <text x="14" y="120" fill="#64748B" font-size="12">direction kept;</text>
+      <text x="14" y="138" font-weight="700" fill="#B45309" font-size="12">log ‖g‖ every step</text>
+    </g>
+    <g transform="translate(764,98)">
+      <rect width="164" height="150" rx="12" fill="#F0FDFA" stroke="#99F6E4"/>
+      <text x="14" y="26" font-weight="700" font-size="15" fill="#0F766E">5 · step + wipe</text>
+      <text x="14" y="52" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">w −= lr · update</text>
+      <text x="14" y="72" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">grad = None</text>
+      <text x="14" y="104" fill="#64748B" font-size="12">AdamW keeps m, v</text>
+      <text x="14" y="120" fill="#64748B" font-size="12">per weight; wipe or</text>
+      <text x="14" y="138" font-weight="700" fill="#0F766E" font-size="12">batch 2 sits on batch 1</text>
+    </g>
+  </g>
+  <g stroke="#64748B" stroke-width="2" marker-end="url(#a)">
+    <line x1="200" y1="173" x2="218" y2="173"/><line x1="388" y1="173" x2="406" y2="173"/>
+    <line x1="576" y1="173" x2="594" y2="173"/><line x1="744" y1="173" x2="762" y2="173"/>
+  </g>
+  <!-- backward sweep -->
+  <path d="M492,252 C492,292 116,292 116,252" fill="none" stroke="#E11D48" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#r)"/>
+  <text x="304" y="306" text-anchor="middle" font-size="13" fill="#BE123C">gradients flow back through the recorded graph, output head first, embeddings last</text>
+
+  <!-- memory strip -->
+  <text x="32" y="346" font-size="14" font-weight="700" fill="#0F172A">What the step must hold, per weight (mixed precision + AdamW)</text>
+  <g transform="translate(32,360)" font-size="12" fill="#FFFFFF" font-weight="600">
+    <rect x="0" y="0" width="100" height="40" rx="6" fill="#4F46E5"/><text x="50" y="25" text-anchor="middle">weight 2 B</text>
+    <rect x="104" y="0" width="100" height="40" rx="6" fill="#E11D48"/><text x="154" y="25" text-anchor="middle">grad 2 B</text>
+    <rect x="208" y="0" width="200" height="40" rx="6" fill="#0EA5E9"/><text x="308" y="25" text-anchor="middle">fp32 master copy 4 B</text>
+    <rect x="412" y="0" width="400" height="40" rx="6" fill="#0D9488"/><text x="612" y="25" text-anchor="middle">AdamW m and v, fp32: 8 B</text>
+    <text x="826" y="25" fill="#0F172A" font-size="15" font-weight="800">= 16 B</text>
+  </g>
+</svg>
