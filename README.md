@@ -205,7 +205,7 @@ Where the GPU time goes (`torch.profiler`, one step, by kernel):
 
 ![0.1 in three formats](figures/05-point-one.svg)
 
-By hand: $0.1 = 1.6 \times 2^{-4}$, and 0.6 in binary is $0.1001\,1001\,1001\ldots$ repeating forever, so every format has to round.
+By hand: $0.1 = 1.6 \times 2^{-4}$, and 0.6 in binary is `0.1001 1001 1001 …` repeating forever, so every format has to round.
 
 | format | layout | sign | exponent | mantissa | hex | stored value | rel. error |
 |---|---|---|---|---|---|---|---|
