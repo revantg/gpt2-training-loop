@@ -6,7 +6,7 @@ an honest MFU, and the number 0.1 in fp32 / bf16 / fp8.
 
 | | |
 |---|---|
-| Notebook (executed, all outputs) | [`training_loop.ipynb`](training_loop.ipynb) |
+| Notebook (executed, all outputs) | [`training_loop.ipynb`](training_loop.ipynb) · [**Open in Colab**](https://colab.research.google.com/github/revantg/training-loop-truth/blob/main/training_loop.ipynb) |
 | Same notebook as plain Python (jupytext) | [`training_loop.py`](training_loop.py) |
 | Hardware | Colab, Tesla T4 16 GB, PyTorch 2.11, fp16 autocast + `GradScaler` |
 | Model | nanoGPT-style decoder: 6 layers, 6 heads, C = 384, T = 256, GPT-2 tokenizer (V padded to 50,304), tied embeddings, **30,062,592 parameters** |
