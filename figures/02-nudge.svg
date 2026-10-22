@@ -24,7 +24,7 @@
     <g font-size="12" fill="#9F1239" font-family="ui-monospace, Menlo, monospace" text-anchor="middle">
       <text x="312" y="140">∂L/∂z</text><text x="210" y="140">× ∂z/∂h</text><text x="108" y="140">× ∂h/∂w</text>
     </g>
-    <text x="20" y="182" font-size="13" fill="#334155">One pass gives all 30M gradients at once.</text>
+    <text x="20" y="182" font-size="13" fill="#334155">One pass gives all 124M gradients at once.</text>
     <text x="20" y="204" font-size="13" fill="#334155">Cost: about 2× a forward pass, for every weight.</text>
   </g>
 

@@ -7,7 +7,7 @@
   </defs>
   <rect x="1" y="1" width="958" height="428" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
   <text x="32" y="44" font-size="22" font-weight="700" fill="#0F172A">One step, five lines</text>
-  <text x="32" y="68" font-size="14" fill="#64748B">forward → loss → backward → clip → update → wipe. Shapes are for B=16, T=256, C=384, V=50,304.</text>
+  <text x="32" y="68" font-size="14" fill="#64748B">forward → loss → backward → clip → update → wipe. Shapes are for B=16, T=1024, C=768, V=50,304.</text>
 
   <!-- stage cards -->
   <g font-size="13">
@@ -25,7 +25,7 @@
       <text x="14" y="26" font-weight="700" font-size="15" fill="#6D28D9">2 · loss</text>
       <text x="14" y="52" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">[B·T, V] vs [B·T]</text>
       <text x="14" y="72" fill="#334155" font-family="ui-monospace, Menlo, monospace" font-size="12">→ loss  [ ]</text>
-      <text x="14" y="104" fill="#64748B" font-size="12">4,096 predictions</text>
+      <text x="14" y="104" fill="#64748B" font-size="12">16,384 predictions</text>
       <text x="14" y="120" fill="#64748B" font-size="12">collapse to</text>
       <text x="14" y="138" font-weight="700" fill="#6D28D9" font-size="12">one number</text>
     </g>
