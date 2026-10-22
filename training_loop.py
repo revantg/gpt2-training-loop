@@ -85,7 +85,7 @@ def imports():
     import torch.nn as nn
     import torch.nn.functional as F
 
-    FIGURES = 'https://raw.githubusercontent.com/revantg/training-loop-truth/main/figures/'
+    FIGURES = 'https://raw.githubusercontent.com/revantg/gpt2-training-loop/main/figures/'
     RESULTS = Path('results')
     RESULTS.mkdir(exist_ok=True)
 
