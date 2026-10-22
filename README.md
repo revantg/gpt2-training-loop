@@ -8,6 +8,7 @@ as an early warning, an honest MFU, and the number 0.1 in fp32 / bf16 / fp8.
 |---|---|
 | Notebook, executed, all outputs | [`training_loop.ipynb`](training_loop.ipynb) |
 | Same notebook as a [marimo](https://marimo.io) file (reactive, with sliders) | [`training_loop.py`](training_loop.py) · run with `marimo edit training_loop.py` |
+| Static exports (Git LFS) | [`exports/training_loop.html`](exports/training_loop.html) · [`exports/training_loop.pdf`](exports/training_loop.pdf) |
 | Hardware | NVIDIA RTX PRO 6000 Blackwell Server Edition: 188 SMs, 102 GB, SM clock capped at 2,430 MHz, 600 W · PyTorch 2.11, CUDA 13 |
 | Model | GPT-2 small: 12 layers, 12 heads, C = 768, T = 1,024, GPT-2 tokenizer (V padded to 50,304), tied embeddings, **124,475,904 parameters** |
 | Precision | bf16 autocast; weights, gradients and AdamW state stay fp32; fp32 loss. No loss scaler needed. |
